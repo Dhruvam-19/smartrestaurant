@@ -1,0 +1,157 @@
+{% extends 'users/home.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<br>
+<div>
+<h1 class="fw-bolder " style="font-family:  'Times New Roman', Times, serif;">SOUP</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for element in object %}
+       {% if element.type.lower == 'soup' %}
+        <div class="col">
+        <form action="{% url 'add_to_cart' element.id %}" method="POST">
+        {% csrf_token %}
+            <div class="card h-100">
+          <img src="/media/{{ element.photo }}" class="img-fluid img-thumbnail " style="width:347px;height:280px;" alt="Image" >
+          <div class="card-body">
+            <h5 class="card-title">{{ element.name }}</h5>
+            <p class="card-text">Type:- {{ element.type }}</p>
+                   <p class="card-text">Description:- {{ element.description }}</p>
+                   <p class="card-text">Price:-{{ element.price }}rs.</p>
+
+          </div>
+          <div class="card-footer">
+
+            Quantity :- <input name="quantity" type="number" value="0" min="0" max="100" step="1">
+                   <br>
+                   <br>
+                    Remarks :- <input name="remarks" type="text">
+              <br>
+              <br>
+                   <button type="submit" class="btn btn-info">Add to cart</button>
+          </div>
+        </div>
+      </form>
+        </div>
+      {% endif %}
+    {% endfor %}
+</div>
+
+<br>
+
+<h1 class="fw-bolder" style="font-family:  'Times New Roman', Times, serif;">CHINESE</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for element in object %}
+
+
+       {% if element.type.lower == 'chinese' %}
+        <div class="col">
+        <form action="{% url 'add_to_cart' element.id %}" method="POST">
+        {% csrf_token %}
+        <div class="card h-100">
+          <img src="/media/{{ element.photo }}" class="img-fluid img-thumbnail " style="width:347px;height:280px;" alt="Image" >
+          <div class="card-body">
+            <h5 class="card-title">{{ element.name }}</h5>
+            <p class="card-text">Type:- {{ element.type }}</p>
+                   <p class="card-text">Description:- {{ element.description }}</p>
+                   <p class="card-text">Price:-{{ element.price }}rs.</p>
+
+          </div>
+          <div class="card-footer">
+
+            Quantity :- <input name="quantity" type="number" value="0" min="0" max="100" step="1">
+                   <br>
+                   <br>
+                    Remarks :- <input name="remarks" type="text">
+              <br>
+              <br>
+                   <button type="submit" class="btn btn-info">Add to cart</button>
+          </div>
+        </div>
+        </form>
+      </div>
+       {% endif %}
+
+    {% endfor %}
+</div>
+<br>
+
+<h1 class="fw-bolder" style="font-family:  'Times New Roman', Times, serif;">MAIN COURSE</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for element in object %}
+
+
+        {% if element.type.lower == 'main course' %}
+        <div class="col">
+        <form action="{% url 'add_to_cart' element.id %}" method="POST">
+        {% csrf_token %}
+            <div class="card h-100">
+          <img src="/media/{{ element.photo }}" class="img-fluid img-thumbnail " style="width:347px;height:280px;" alt="Image" >
+          <div class="card-body">
+            <h5 class="card-title">{{ element.name }}</h5>
+            <p class="card-text">Type:- {{ element.type }}</p>
+                   <p class="card-text">Description:- {{ element.description }}</p>
+                   <p class="card-text">Price:-{{ element.price }}rs.</p>
+
+          </div>
+          <div class="card-footer">
+
+            Quantity :- <input name="quantity" type="number" value="0" min="0" max="100" step="1">
+                   <br>
+                   <br>
+                    Remarks :- <input name="remarks" type="text">
+              <br>
+              <br>
+                   <button type="submit" class="btn btn-info">Add to cart</button>
+          </div>
+        </div>
+      </form>
+        </div>
+       {% endif %}
+
+    {% endfor %}
+</div>
+<br>
+
+<h1 class="fw-bolder" style="font-family:  'Times New Roman', Times, serif;" >BREAD</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for element in object %}
+       {% if element.type.lower == 'bread' %}
+       <div class="col">
+           <form action="{% url 'add_to_cart' element.id %}" method="POST">
+               {% csrf_token %}
+        <div class="card h-100">
+          <img src="/media/{{ element.photo }}" class="img-fluid img-thumbnail " style="width:347px;height:280px;" alt="Image" >
+          <div class="card-body">
+            <h5 class="card-title">{{ element.name }}</h5>
+            <p class="card-text">Type:- {{ element.type }}</p>
+                   <p class="card-text">Description:- {{ element.description }}</p>
+                   <p class="card-text">Price:-{{ element.price }}rs.</p>
+
+          </div>
+          <div class="card-footer">
+
+            Quantity :- <input name="quantity" type="number" value="0" min="0" max="100" step="1">
+                   <br>
+                   <br>
+                    Remarks :- <input name="remarks" type="text">
+              <br>
+              <br>
+                   <button type="submit" class="btn btn-info">Add to cart</button>
+          </div>
+        </div>
+           </form>
+      </div>
+       {% endif %}
+    {% endfor %}
+</div>
+<br>
+    </div>
+
+<div>
+      <a type="button" class="btn btn-primary"  href="{% url 'view_cart' %}"> View cart </a>
+</div>
+    <br>
+<br>
+
+
+{% endblock %}

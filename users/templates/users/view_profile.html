@@ -1,0 +1,97 @@
+{% extends "users/home.html" %}
+
+{% block body %}
+
+<div class="container-fluid">
+    {{ object.type }}
+<p><u><strong>Personal Details</strong></u></p>
+    <div class="form-row">
+      <div class="form-group col-md-12 mb-0">
+
+          <font class="font-weight-bolder text-monospace text-capitalize" > Profile Picture </font>
+          <br>
+          <img src="/media/{{ object.image }}" class="rounded-circle   " alt="100x100" height="200px" width="215px" alt="Profile pic not uploded">
+      </div>
+    </div>
+     <br>
+    <div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+          <font class="header" > Firstname </font>  :- <font class=" value "> {{ object.first_name }} </font>
+
+      </div>
+      <div class="form-group col-md-4 mb-0">
+        <font class="header" > Middlename </font>  :- <font class="value"> {{ object.middle_name }} </font>
+
+
+
+      </div>
+      <div class="form-group col-md-4 mb-0">
+       <font class="header" > Lastname </font>  :- <font class="value"> {{ object.last_name }} </font>
+
+
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+          <font class="header" >Father FirstName </font> :- <font class="value "> {{ object.father_first_name }} </font>
+      </div>
+      <div class="form-group col-md-4 mb-0">
+          <font class="header" >Father MiddleName </font> :- <font class="value "> {{ object.father_middle_name }} </font>
+      </div>
+      <div class="form-group col-md-4 mb-0">
+          <font class="header" > Father LastName </font>:-<font class="value  "> {{ object.father_last_name }}</font>
+      </div>
+      <div class="form-group col-md-4 mb-0">
+          <font class="header" >Date of Birth </font> :- <font class="value  ">{{ object.date_of_birth }} </font>
+
+      </div>
+      <div class="form-group col-md-4 mb-0">
+          <font class="header" > Joining Date </font> :- <font class="value "> {{ object.joining_date }}</font>
+
+      </div>
+
+        <div class="form-group col-md-4 mb-0">
+            <font class="header" > Adharcard Number </font> :- <font class="value"> {{ object.adharcard_number }}</font>
+
+      </div>
+
+    </div>
+    <br>
+
+     <p><u><strong>Contact Details</strong></u></p>
+    <div class="form-row">
+
+      <div class="form-group col-md-6 mb-0">
+         <font class="header" > Email Id </font> :- <font class="value "> {{ object.email }} </font>
+
+      </div>
+      <div class="form-group col-md-4 mb-0">
+        <font class="header" > Phone Number1 </font> :- <font class="value"> {{ object.phone_number1 }} </font>
+
+      </div>
+      <div class="form-group col-md-4 mb-0">
+        <font class="header" > Phone Number2 </font> :- <font class="value"> {{ object.phone_number2 }} </font>
+      </div>
+
+    </div>
+<br>
+
+ <p><u><strong>Address Details</strong></u></p>
+    <font class="header" > Address Lane1 </font> :- <font class="value "> {{ object.address_lane1 }} </font>
+    <br>
+    <font class="header" > Address Lane2 </font> :- <font class="value  "> {{ object.address_lane2 }} </font>
+    <br>
+    <font class="header" > Address Lane3 </font> :- <font class="value "> {{ object.address_lane3 }} </font>
+    <div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+        <font class="header" > Country </font> :- <font class="value  "> {{ object.country }} </font>
+      </div>
+      <div class="form-group col-md-4 mb-0">
+        <font class="header" > State </font> :- <font class="value "> {{ object.state }} </font>
+      </div>
+    </div>
+<br>
+
+
+</div>
+{% endblock %}

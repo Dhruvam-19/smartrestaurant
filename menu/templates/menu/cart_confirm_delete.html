@@ -1,0 +1,16 @@
+{% extends "users/home.html" %}
+{% block body %}
+<div class="container-fluid">
+    <div class="content-section">
+        <form method="post">
+            {% csrf_token %}
+            <h2> Are you sure you want to delete {{ object.quantity }} {{ object.item.name }} from the cart ? </h2>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit" >Yes, Delete</button>
+                <a class="btn btn-secondary" href="{% url 'view_cart' %}"> cancel </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

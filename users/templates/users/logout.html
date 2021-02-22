@@ -1,0 +1,13 @@
+{% extends "users/home.html" %}
+
+{% block body %}
+<div class="container fluid" >
+    <h1> Successfully logged out!!</h1>
+        <div class="border-top pt-3">
+            <small class="text-muted">Already have an Account ?
+                <a href="{% url 'login' %}">Login In </a>
+            </small>
+        </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,104 @@
+{% extends 'users/home.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            // Total over all pages
+            total = api
+                .column( 4 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Total over this page
+            pageTotal = api
+                .column( 4, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Update footer
+            $( api.column( 4 ).footer() ).html(
+                'Rs.'+ total
+            );
+        }
+    } );
+} );
+
+</script>
+
+
+<div class="container-fluid">
+
+    <table id="example" class="cell-border hover display compact"   style="width:100%">
+        <thead>
+            <th>Item name</th>
+            <th>Item Type</th>
+            <th>Quantity</th>
+            <th>Remarks</th>
+            <th>Price</th>
+            <th> Delete Item </th>
+        </thead>
+        <tbody>
+            {% for element in object %}
+                <tr>
+                    <td>
+                        {{ element.item.name }}
+                    </td>
+                    <td>
+                        {{ element.item.type }}
+                    </td>
+                    <td>
+                        {{ element.quantity }}
+                    </td>
+                    <td>
+                        {{ element.notes }}
+                    </td>
+                    <td>
+                        {% widthratio  element.item.price 1 element.quantity  %}
+
+                    </td>
+                    <td>
+                        <button type="button" class="text-white btn btn-danger ">
+                                <a style = "color:white" href="{% url 'delete_cartitem' element.id  %}">
+                                    Delete Item
+                                </a>
+                            </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+         <tfoot>
+            <tr>
+                <th colspan="4" style="text-align:right">Total:</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div>
+    <a type="button" class="btn btn-primary"  href="{% url 'view_menu' %}"> BACK </a>
+
+</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+  <button class="btn btn-primary" type="button">Proceed to Pay</button>
+</div>
+{% endblock %}

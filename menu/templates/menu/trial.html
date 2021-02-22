@@ -1,0 +1,28 @@
+
+<br>
+    <div class="container" >
+
+       <div class="row " >
+        {% for element in object %}
+        <div class="col-sm-4">
+
+           <div class="card h-100 " >
+               <img class="card-img-top"  src="/media/{{ element.photo }}" alt="Image" style="width:286px;height:225px;">
+               <div class="card-body">
+                   <h5 class="card-title"> {{ element.name }}</h5>
+                   <p class="card-text">Type:- {{ element.type }}</p>
+                   <p class="card-text">Description:- {{ element.description }}</p>
+                   <p class="card-text">Price:-{{ element.price }}rs.</p>
+                   <input type="number" value="0" min="0" max="100" step="1">
+                   <br>
+                   <br>
+                   <button type="button" class="btn btn-info">Add to cart</button>
+               </div>
+            </div>
+            </div>
+        {% endfor %}
+           <br>
+           <br>
+       </div>
+       </div>
+    </div>
