@@ -2,6 +2,9 @@
 {% load crispy_forms_tags %}
 {% block body %}
 <script>
+    $(document).ready(function() {
+    $('table.display').DataTable();
+} );
 $(document).ready(function() {
     $('#example').DataTable( {
         "footerCallback": function ( row, data, start, end, display ) {
@@ -35,23 +38,98 @@ $(document).ready(function() {
             $( api.column( 4 ).footer() ).html(
                 'Rs.'+ total
             );
+
+            total_time = api
+                .column( 5 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Total over this page
+            pageTotal_time = api
+                .column( 5, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // Update footer
+            $( api.column( 5 ).footer() ).html(
+                 total_time + 'Minutes'
+            );
+
         }
     } );
 } );
 
+
+
+
 </script>
 
+{% if user.profile.type == 'Chef' %}
+<div class="container-fluid">
+
+    <table id="" class=" cell-border hover display stripe "   style="width:100%">
+        <thead>
+            <th>Item name</th>
+            <th>Quantity</th>
+            <th>Remarks</th>
+            <th>Table no</th>
+            <th>Status</th>
+
+        </thead>
+        <tbody>
+            {% for elements in object1 %}
+            {% if elements.status == 'Not Done' %}
+                <tr>
+                    <td>
+                        {{ elements.item.name }}
+                    </td>
+
+                    <td>
+                        {{ elements.quantity }}
+                    </td>
+                    <td>
+                        {{ elements.notes }}
+                    </td>
+                    <td>
+                        {{ elements.user.username }}
+                    </td>
+                    <td>
+                        <button type="button" class="text-white btn btn-success ">
+                                <a style = "color:white" href="#">
+                                    Accept Item
+                                </a>
+                            </button>
+                    </td>
+
+
+                </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+
+
+
+{% else %}
 
 <div class="container-fluid">
 
-    <table id="example" class="cell-border hover display compact"   style="width:100%">
+    <table id="" class="cell-border hover display"   style="width:100%">
         <thead>
             <th>Item name</th>
             <th>Item Type</th>
             <th>Quantity</th>
             <th>Remarks</th>
             <th>Price</th>
+            <th>Time</th>
             <th> Delete Item </th>
+
         </thead>
         <tbody>
             {% for element in object %}
@@ -68,9 +146,14 @@ $(document).ready(function() {
                     <td>
                         {{ element.notes }}
                     </td>
+
                     <td>
                         {% widthratio  element.item.price 1 element.quantity  %}
 
+
+                    </td>
+                    <td>
+                        {{ element.item.approx_time }}
                     </td>
                     <td>
                         <button type="button" class="text-white btn btn-danger ">
@@ -79,13 +162,16 @@ $(document).ready(function() {
                                 </a>
                             </button>
                     </td>
+
                 </tr>
             {% endfor %}
         </tbody>
          <tfoot>
             <tr>
-                <th colspan="4" style="text-align:right">Total:</th>
-                <th></th>
+                <th colspan="5" style="text-align:right">Total:</th>
+
+                <th  style="text-align:right" > Min </th>
+
                 <th></th>
 
             </tr>
@@ -101,4 +187,11 @@ $(document).ready(function() {
 
   <button class="btn btn-primary" type="button">Proceed to Pay</button>
 </div>
+
+
+
+
+{% endif %}
+
+
 {% endblock %}

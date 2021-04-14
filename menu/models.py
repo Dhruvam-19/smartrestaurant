@@ -7,6 +7,7 @@ class Menu(models.Model):
     description = models.TextField( blank=True, null=True)
     photo = models.ImageField(default='default.jpg', upload_to='menu', null=True, blank=True)
     type = models.CharField(max_length=30, blank=True, null=True)
+    approx_time = models.IntegerField(blank=True, null=True)
     price = models.IntegerField(blank=True, null=True)
 
     def get_absolute_url(self):
@@ -20,7 +21,11 @@ class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     quantity = models.IntegerField(blank=True,null=True)
     notes = models.TextField(blank=True,null=True)
-
+    status = models.CharField(max_length=20,blank=True,null=True,default='Not Done')
 
     def __str__(self):
         return f"{self.item.name}"
+
+
+
+
